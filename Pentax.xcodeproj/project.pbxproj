@@ -156,6 +156,7 @@
 				TargetAttributes = {
 					4F8D5E9C1B6C0568005E64D4 = {
 						CreatedOnToolsVersion = 6.4;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -352,11 +353,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Pentax/Pentax.entitlements;
+				DEVELOPMENT_TEAM = 2Q52UJ4449;
 				INFOPLIST_FILE = Pentax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pentax.ipadapp.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lookcompany.lookcares;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2af65a9e-0f90-4a84-81ab-c709b5117e20";
+				PROVISIONING_PROFILE_SPECIFIER = LookCares_Dev;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -368,11 +372,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Pentax/Pentax.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2Q52UJ4449;
 				INFOPLIST_FILE = Pentax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.pentax.ipadapp.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lookcompany.lookcares;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2c97e595-bf7b-49c2-938e-35d01427211c";
+				PROVISIONING_PROFILE_SPECIFIER = LookCares_Dist;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
