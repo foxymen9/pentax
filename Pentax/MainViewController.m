@@ -397,6 +397,7 @@
 }
 
 - (IBAction)onBtnSubmit:(id)sender {
+    [self initialization];
     RootViewController *rootVC = [[RootViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:rootVC animated:YES];
 }

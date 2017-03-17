@@ -123,8 +123,6 @@
     }
     else
     {
-        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-//        [self dismissViewControllerAnimated:NO completion:nil];
     }
 }
 
@@ -203,7 +201,7 @@
         [self createAPI:fields];
     }
     [self clearUserDefaults];
-    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 - (void) clearUserDefaults {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
