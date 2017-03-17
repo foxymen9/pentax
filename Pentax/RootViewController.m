@@ -29,6 +29,20 @@
 #import <SalesforceSDKCore/SFRestRequest.h>
 
 @implementation RootViewController
+{
+    NSArray *records;
+    
+    NSMutableArray  *Array_Image_Quality,
+    *Array_Maneuverability,
+    *Array_Overall_Experience,
+    *Array_Ease_of_use,
+    *Array_IsSufficient,
+    *Array_IsAskQuestions,
+    *Array_Is_Fully_Answered,
+    *Array_Is_Acceptable,
+    *Array_Comments,
+    *Array_Demo_Physician_Name;
+}
 
 @synthesize dataRows;
 
@@ -55,19 +69,63 @@
     self.title = @"Demo Evaluation Form";
     
     //Here we use a query that should work on either Force.com or Database.com
-    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Name FROM User LIMIT 10"];
+//    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Name FROM User LIMIT 10"];
+    
+    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForQuery:@"SELECT Id, Name, Opportunity__r.Name FROM Demo_Request__c"];
+    [[SFRestAPI sharedInstance] send:request delegate:self];
+    
+//    [self testAPI];
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    Array_Image_Quality = (NSMutableArray*) [userDefaults objectForKey:@"Image_Quality__c"];
+    Array_Maneuverability = (NSMutableArray*) [userDefaults objectForKey:@"Maneuverability__c"];
+    Array_Overall_Experience = (NSMutableArray*) [userDefaults objectForKey:@"Overall_Experience__c"];
+    Array_Ease_of_use = (NSMutableArray*) [userDefaults objectForKey:@"Ease_of_use__c"];
+    Array_IsSufficient = (NSMutableArray*) [userDefaults objectForKey:@"IsSufficient__c"];
+    Array_IsAskQuestions = (NSMutableArray*) [userDefaults objectForKey:@"IsAskQuestions__c"];
+    Array_Is_Fully_Answered = (NSMutableArray*) [userDefaults objectForKey:@"Is_Fully_Answered__c"];
+    Array_Is_Acceptable = (NSMutableArray*) [userDefaults objectForKey:@"Is_Acceptable__c"];
+    Array_Comments = (NSMutableArray*) [userDefaults objectForKey:@"Comments__c"];
+    Array_Demo_Physician_Name = (NSMutableArray*) [userDefaults objectForKey:@"Demo_Physician_Name__c"];
+    
+}
+
+- (void) testAPI {
+    NSDictionary *fields = @{
+                             @"Demo_Request__c":@"a014C000000wBO5QAM",
+                             @"Image_Quality__c":@"2",
+                             @"Maneuverability__c":@"1",
+                             @"Overall_Experience__c":@"5",
+                             @"Ease_of_use__c":@"4",
+                             @"IsSufficient__c": @"true",
+                             @"IsAskQuestions__c": @"false",
+                             @"Is_Fully_Answered__c": @"true",
+                             @"Is_Acceptable__c": @"true",
+                             @"Comments__c": @"This is for test2",
+                             @"Demo_Physician_Name__c": @"Bendt Jensen"
+                             };
+    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Demo_Eval_Form__c" fields:fields];
     [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 
 #pragma mark - SFRestDelegate
 
 - (void)request:(SFRestRequest *)request didLoadResponse:(id)jsonResponse {
-    NSArray *records = jsonResponse[@"records"];
-    NSLog(@"request:didLoadResponse: #records: %lu", (unsigned long)records.count);
-    self.dataRows = records;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    NSLog(@"Response:%@", jsonResponse);
+    records = jsonResponse[@"records"];
+    if (records){
+        NSLog(@"records:%@", records);
+        NSLog(@"request:didLoadResponse: #records: %lu", (unsigned long)records.count);
+        self.dataRows = records;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
+    else
+    {
+        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+//        [self dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 
@@ -120,5 +178,49 @@
     
     return cell;
     
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger count = [Array_Image_Quality count];
+    NSString *Demo_Request__c = [[records objectAtIndex:indexPath.row] objectForKey:@"Id"];
+    
+    NSLog(@"Demo_Request__c:%@", Demo_Request__c);
+    
+    for (int i = 0; i < count; i++)
+    {
+        NSDictionary *fields = @{
+                                 @"Demo_Request__c":Demo_Request__c,
+                                 @"Image_Quality__c":(NSString*)[Array_Image_Quality objectAtIndex:i],
+                                 @"Maneuverability__c":(NSString*)[Array_Maneuverability objectAtIndex:i],
+                                 @"Overall_Experience__c":(NSString*)[Array_Overall_Experience objectAtIndex:i],
+                                 @"Ease_of_use__c":(NSString*)[Array_Ease_of_use objectAtIndex:i],
+                                 @"IsSufficient__c": (NSString*)[Array_IsSufficient objectAtIndex:i],
+                                 @"IsAskQuestions__c": (NSString*)[Array_IsAskQuestions objectAtIndex:i],
+                                 @"Is_Fully_Answered__c": (NSString*)[Array_Is_Fully_Answered objectAtIndex:i],
+                                 @"Is_Acceptable__c": (NSString*)[Array_Is_Acceptable objectAtIndex:i],
+                                 @"Comments__c": (NSString*)[Array_Comments objectAtIndex:i],
+                                 @"Demo_Physician_Name__c": (NSString*)[Array_Demo_Physician_Name objectAtIndex:i]
+                                 };
+        [self createAPI:fields];
+    }
+    [self clearUserDefaults];
+    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+}
+- (void) clearUserDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"Image_Quality__c"];
+    [userDefaults removeObjectForKey:@"Maneuverability__c"];
+    [userDefaults removeObjectForKey:@"Overall_Experience__c"];
+    [userDefaults removeObjectForKey:@"Ease_of_use__c"];
+    [userDefaults removeObjectForKey:@"IsSufficient__c"];
+    [userDefaults removeObjectForKey:@"IsAskQuestions__c"];
+    [userDefaults removeObjectForKey:@"Is_Fully_Answered__c"];
+    [userDefaults removeObjectForKey:@"Is_Acceptable__c"];
+    [userDefaults removeObjectForKey:@"Comments__c"];
+    [userDefaults removeObjectForKey:@"Demo_Physician_Name__c"];
+    [userDefaults removeObjectForKey:@"Image_Quality__c"];
+}
+- (void) createAPI:(NSDictionary*) fields {
+    SFRestRequest *request = [[SFRestAPI sharedInstance] requestForCreateWithObjectType:@"Demo_Eval_Form__c" fields:fields];
+    [[SFRestAPI sharedInstance] send:request delegate:self];
 }
 @end

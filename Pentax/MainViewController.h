@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIView *viewSub;
 @property (weak, nonatomic) IBOutlet UITextField *txt_name;
 @property (weak, nonatomic) IBOutlet UITextView *txt_comment;
-- (IBAction)onBtnSave:(id)sender;
+
 
 
 // Quality
@@ -51,6 +51,10 @@
 - (IBAction)onBtnAverageE:(id)sender;
 - (IBAction)onBtnFavorableE:(id)sender;
 - (IBAction)onBtnExcellentE:(id)sender;
+- (IBAction)onBtnSubmit:(id)sender;
+- (IBAction)onBtnSave:(id)sender;
+- (IBAction)onBtnClear:(id)sender;
+
 
 // Overal
 @property (weak, nonatomic) IBOutlet UIButton *btn_poor_o;

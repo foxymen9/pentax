@@ -712,7 +712,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gM0-yg-Klf">
-                                            <rect key="frame" x="45" y="39" width="678" height="128"/>
+                                            <rect key="frame" x="45" y="39" width="678" height="58"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="H3M-LL-6AA"/>
@@ -731,30 +731,63 @@
                                         <constraint firstItem="gM0-yg-Klf" firstAttribute="top" secondItem="uor-LJ-TG1" secondAttribute="bottom" constant="-8" id="bQ2-s8-gXt"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mo0-3z-qPZ" userLabel="view_save">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mo0-3z-qPZ" userLabel="view_buttons">
                                     <rect key="frame" x="20" y="2144" width="768" height="93"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8T-Aw-8L4">
+                                            <rect key="frame" x="44" y="19" width="180" height="55"/>
+                                            <color key="backgroundColor" red="0.35378146510000003" green="0.6232874773" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="180" id="GZS-jM-tdw"/>
+                                                <constraint firstAttribute="height" constant="55" id="ssV-O2-pcm"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <state key="normal" title="SUBMIT">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onBtnSubmit:" destination="-1" eventType="touchUpInside" id="MJa-UY-6l5"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zk-MD-v7q">
-                                            <rect key="frame" x="298" y="19" width="172" height="55"/>
+                                            <rect key="frame" x="294" y="19" width="180" height="55"/>
                                             <color key="backgroundColor" red="0.35378146507237707" green="0.62328747725489952" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="55" id="3Gv-rv-KgF"/>
+                                                <constraint firstAttribute="width" constant="180" id="nNX-bl-f8f"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                             <state key="normal" title="SAVE">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="onBtnSave:" destination="-1" eventType="touchUpInside" id="HeV-Ag-DQu"/>
+                                                <action selector="onBtnSave:" destination="-1" eventType="touchUpInside" id="ALt-Na-MDa"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOs-oG-DoZ">
+                                            <rect key="frame" x="544" y="19" width="180" height="55"/>
+                                            <color key="backgroundColor" red="0.35378146510000003" green="0.6232874773" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="180" id="J5k-fp-YIb"/>
+                                                <constraint firstAttribute="height" constant="55" id="Tmr-Dg-Zb2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <state key="normal" title="CLEAR">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onBtnClear:" destination="-1" eventType="touchUpInside" id="zIW-N4-SrX"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="e8T-Aw-8L4" firstAttribute="centerY" secondItem="Mo0-3z-qPZ" secondAttribute="centerY" id="N9D-A9-aZ9"/>
                                         <constraint firstItem="2Zk-MD-v7q" firstAttribute="centerX" secondItem="Mo0-3z-qPZ" secondAttribute="centerX" id="WYb-dw-pIV"/>
-                                        <constraint firstItem="2Zk-MD-v7q" firstAttribute="leading" secondItem="Mo0-3z-qPZ" secondAttribute="leading" constant="298" id="dy0-26-zbF"/>
+                                        <constraint firstItem="mOs-oG-DoZ" firstAttribute="leading" secondItem="2Zk-MD-v7q" secondAttribute="trailing" constant="70" id="dQQ-qg-bdc"/>
+                                        <constraint firstItem="mOs-oG-DoZ" firstAttribute="centerY" secondItem="Mo0-3z-qPZ" secondAttribute="centerY" id="ddG-D2-yga"/>
+                                        <constraint firstItem="2Zk-MD-v7q" firstAttribute="leading" secondItem="e8T-Aw-8L4" secondAttribute="trailing" constant="70" id="eBI-C1-J3b"/>
                                         <constraint firstAttribute="height" constant="93" id="mu9-Ip-S1h"/>
-                                        <constraint firstAttribute="trailing" secondItem="2Zk-MD-v7q" secondAttribute="trailing" constant="298" id="qUj-4k-JtR"/>
                                         <constraint firstItem="2Zk-MD-v7q" firstAttribute="centerY" secondItem="Mo0-3z-qPZ" secondAttribute="centerY" id="y5L-E6-2cU"/>
                                     </constraints>
                                 </view>
